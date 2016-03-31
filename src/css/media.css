@@ -1,0 +1,34 @@
+@media only screen and (max-width: 480px) {
+	.detail {
+		max-width: 100px;
+		border: none;
+		padding: 0;
+	}
+	.detail .detail_name {
+		font-size: 16px;
+	}
+	.list .item {
+		padding: 0px;
+		border: none;
+		margin-bottom: 10px;
+		border-radius: none;
+		flex-basis: 80px;
+	}
+}
+@media only screen and (max-width: 768px) {
+	.detail {
+		max-width: 100px;
+	}
+	.detail .detail_name {
+		font-size: 30px;
+	}
+}
+
+@media only screen and (max-width: 1024px) {
+	.detail {
+		max-width: 150px;
+	}
+	.detail .detail_name {
+		font-size: 30px;
+	}
+}
