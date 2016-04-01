@@ -167,13 +167,54 @@ var add_more_pockemons = function() {
 					detail_list(this_obj[0]);
 				});
 			}
-			console.log('clicked when ajax done');
+			console.log('clicked when ajax done'); 
 	}); 
 }
 // initiate for firts time list
 add_more_pockemons();
-// add to button our function
-add_more_button.addEventListener('click', add_more_pockemons);
+// add to button our function 
+add_more_button.addEventListener('click', function(){
+	preloader.style.display = 'block';
+	var url = 'http://pokeapi.co/api/v1/pokemon/?limit='+ count_add_more.toString();
+	$.ajax({
+		url: url,
+		success: function(data){
+			// update our count to get more items next time
+			count_add_more += 12;
+			// put in global var all list of objects (to find our obj in detail function)
+			objects_array = data;
+			// create list of items
+			let test1 = makeList(data.objects);
+			// take our list block
+			let block = document.querySelector('.list');
+			// put it in dom with innerHTML
+			block.innerHTML = test1.innerHTML;
+			// hide preloader 
+			preloader.style.display = 'none';
+			// onclick event add/update detail function
+			let array = document.querySelectorAll('.list .item');
+			// go throu all items
+			for(let i = 0; i < array.length; i++){
+				// add on each card (item) event listener
+				array[i].addEventListener('click', function(){
+					// take this this item id
+					let id = this.getAttribute('id');
+					// find in array of objects our obj (using id)
+					let this_obj = objects_array.objects.filter(function(item) {
+						return item.pkdx_id == id;
+					});
+					// take detail block
+					let detail_wrap = document.querySelector('.detail');
+					// clear detail block
+					detail_wrap.innerHTML = '';
+					// put our new obj data
+					detail_list(this_obj[0]);
+				});
+			}
+			console.log('clicked when ajax done');
+		}
+	});
+});
 
 
 
